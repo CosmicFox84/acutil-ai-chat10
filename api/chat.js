@@ -1,19 +1,17 @@
-export default async function handler(request) {
+export default async function handler(request, response) {
   if (request.method !== "POST") {
-    return Response.json(
-      { error: "Only POST requests are allowed." },
-      { status: 405 }
-    );
+    return response.status(405).json({
+      error: "Only POST requests are allowed."
+    });
   }
 
   try {
-    const { message, personality } = await request.json();
+    const { message, personality } = request.body || {};
 
     if (!message || typeof message !== "string") {
-      return Response.json(
-        { error: "Message is required." },
-        { status: 400 }
-      );
+      return response.status(400).json({
+        error: "Message is required."
+      });
     }
 
     let style;
@@ -29,43 +27,45 @@ export default async function handler(request) {
         "Be very friendly, encouraging and empathetic. Make the conversation warm and supportive while remaining useful and clear.";
     }
 
-    const response = await fetch("https://api.openai.com/v1/responses", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-6-luna",
-        instructions: `You are the ACUTIL AI assistant.
+    const openAIResponse = await fetch(
+      "https://api.openai.com/v1/responses",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+        },
+        body: JSON.stringify({
+          model: "gpt-6-luna",
+          instructions: `You are the ACUTIL AI assistant.
 
 ${style}
 
 Answer the user's question naturally and helpfully.`,
-        input: message,
-      }),
-    });
+          input: message
+        })
+      }
+    );
 
-    const data = await response.json();
+    const data = await openAIResponse.json();
 
-    if (!response.ok) {
+    if (!openAIResponse.ok) {
       console.error(data);
 
-      return Response.json(
-        { error: "The AI service returned an error." },
-        { status: response.status }
-      );
+      return response.status(openAIResponse.status).json({
+        error: data.error?.message || "The AI service returned an error."
+      });
     }
 
-    return Response.json({
-      reply: data.output_text || "I couldn't generate a response.",
+    return response.status(200).json({
+      reply: data.output_text || "I couldn't generate a response."
     });
+
   } catch (error) {
     console.error(error);
 
-    return Response.json(
-      { error: "Something went wrong." },
-      { status: 500 }
-    );
+    return response.status(500).json({
+      error: "Something went wrong."
+    });
   }
 }
