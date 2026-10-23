@@ -16,16 +16,16 @@ export default async function handler(request, response) {
 
     let style;
 
-    if (personality <= 33) {
-      style =
-        "Be direct, concise and straightforward. Give clear answers without unnecessary friendliness.";
-    } else if (personality <= 66) {
-      style =
-        "Be balanced, helpful and warm. Be clear and friendly, but not overly casual.";
-    } else {
-      style =
-        "Be very friendly, encouraging and empathetic. Make the conversation warm and supportive while remaining useful and clear.";
-    }
+    if (personality <= 0.3) {
+  style =
+    "Use low-temperature behavior. Be predictable, factual, concise and straightforward. Focus on solving the user's problem. Avoid unnecessary creativity, jokes or unusual ideas.";
+} else if (personality <= 0.7) {
+  style =
+    "Use medium-temperature behavior. Be clear, helpful and balanced. Add a small amount of creativity when useful, while staying practical.";
+} else {
+  style =
+    "Use high-temperature behavior. Be creative, playful and imaginative. Brainstorm freely, use humor when appropriate, and offer unconventional ideas while still answering the user's question.";
+}
 
     const openAIResponse = await fetch(
       "https://api.openai.com/v1/responses",
