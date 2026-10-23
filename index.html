@@ -969,62 +969,64 @@
        TEMPORARY CHAT
     ========================= */
 
-    function sendMessage() {
+    async function sendMessage() {
+  const input = document.getElementById("userInput");
+  const messages = document.getElementById("messages");
+  const text = input.value.trim();
 
-        const input =
-            document.getElementById("userInput");
+  if (!text) {
+    return;
+  }
 
-        const messages =
-            document.getElementById("messages");
+  // USER MESSAGE
+  const userMessage = document.createElement("div");
+  userMessage.className = "message user";
+  userMessage.textContent = text;
+  messages.appendChild(userMessage);
 
-        const text =
-            input.value.trim();
+  input.value = "";
 
+  messages.scrollTop = messages.scrollHeight;
 
-        if (!text) {
-            return;
-        }
+  // AI MESSAGE - loading
+  const botMessage = document.createElement("div");
+  botMessage.className = "message bot";
+  botMessage.textContent = "Thinking... 🤖";
+  messages.appendChild(botMessage);
 
+  messages.scrollTop = messages.scrollHeight;
 
-        /* USER MESSAGE */
+  // Get slider value
+  const slider = document.querySelector('input[type="range"]');
+  const personality = slider ? Number(slider.value) : 50;
 
-        const userMessage =
-            document.createElement("div");
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: text,
+        personality: personality
+      })
+    });
 
-        userMessage.className =
-            "message user";
+    const data = await response.json();
 
-        userMessage.textContent =
-            text;
-
-        messages.appendChild(userMessage);
-
-
-        input.value = "";
-
-
-        /* TEMPORARY BOT RESPONSE */
-
-        setTimeout(function () {
-
-            const botMessage =
-                document.createElement("div");
-
-            botMessage.className =
-                "message bot";
-
-            botMessage.textContent =
-                "Thanks for your question! Soon I'll be connected to the real AI. 🤖";
-
-            messages.appendChild(botMessage);
-
-
-            messages.scrollTop =
-                messages.scrollHeight;
-
-        }, 500);
-
+    if (!response.ok) {
+      throw new Error(data.error || "Something went wrong.");
     }
+
+    botMessage.textContent = data.reply || "I couldn't generate a response.";
+  } catch (error) {
+    console.error(error);
+    botMessage.textContent =
+      "Sorry, something went wrong. Please try again. 😕";
+  }
+
+  messages.scrollTop = messages.scrollHeight;
+}
 
 </script>
 
