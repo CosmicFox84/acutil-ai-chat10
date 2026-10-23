@@ -1,0 +1,1034 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ACUTIL — Mind & Body</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #193b37;
+            background: #f5f7f4;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            height: 82px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 7%;
+
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+
+            border-bottom: 1px solid #e5ebe7;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #174d46;
+        }
+
+        nav {
+            display: flex;
+            gap: 35px;
+        }
+
+        nav a {
+            color: #36524e;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        nav a:hover {
+            color: #174d46;
+        }
+
+        .header-button {
+            background: #174d46;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            min-height: 720px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 80px 7%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(235,242,237,0.98) 0%,
+                    rgba(235,242,237,0.85) 45%,
+                    rgba(235,242,237,0.25) 100%
+                ),
+                url("https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=2000&q=85");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content {
+            max-width: 680px;
+        }
+
+        .eyebrow {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #66847e;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            font-size: clamp(50px, 7vw, 88px);
+            line-height: 0.98;
+            font-weight: 500;
+            letter-spacing: -3px;
+            margin-bottom: 35px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            line-height: 1.7;
+            color: #506761;
+            max-width: 580px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 40px;
+        }
+
+        .primary-button {
+            display: inline-block;
+            padding: 16px 27px;
+
+            background: #174d46;
+            color: white;
+
+            border-radius: 30px;
+
+            text-decoration: none;
+        }
+
+        .secondary-button {
+            display: inline-block;
+            padding: 16px 27px;
+
+            background: white;
+            color: #174d46;
+
+            border-radius: 30px;
+
+            text-decoration: none;
+        }
+
+
+        /* =========================
+           INTRO
+        ========================= */
+
+        .intro {
+            padding: 120px 8%;
+            background: white;
+        }
+
+        .intro-inner {
+            max-width: 1050px;
+            margin: auto;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+
+            align-items: center;
+        }
+
+        .intro-image {
+            width: 100%;
+            height: 500px;
+
+            object-fit: cover;
+
+            border-radius: 25px;
+        }
+
+        .intro-text span {
+            color: #78928c;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .intro-text h2 {
+            font-size: 48px;
+            line-height: 1.1;
+            font-weight: 500;
+            margin: 20px 0 25px;
+        }
+
+        .intro-text p {
+            color: #657570;
+            line-height: 1.8;
+            font-size: 17px;
+        }
+
+
+        /* =========================
+           TOPICS
+        ========================= */
+
+        .topics {
+            padding: 110px 7%;
+            background: #eaf0ed;
+        }
+
+        .section-heading {
+            text-align: center;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .section-heading span {
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #718a84;
+        }
+
+        .section-heading h2 {
+            font-size: 50px;
+            font-weight: 500;
+            margin-top: 18px;
+        }
+
+        .section-heading p {
+            color: #657570;
+            margin-top: 20px;
+            line-height: 1.7;
+        }
+
+        .topic-grid {
+            max-width: 1100px;
+            margin: 60px auto 0;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .topic-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+
+            transition: transform 0.3s ease;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .topic-card img {
+            width: 100%;
+            height: 230px;
+            object-fit: cover;
+        }
+
+        .topic-content {
+            padding: 28px;
+        }
+
+        .topic-content h3 {
+            font-size: 25px;
+            margin-bottom: 12px;
+        }
+
+        .topic-content p {
+            color: #71807c;
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           AI SECTION
+        ========================= */
+
+        .ai-section {
+            padding: 120px 20px;
+            background: #173f3a;
+            color: white;
+        }
+
+        .ai-intro {
+            max-width: 700px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .ai-intro span {
+            font-size: 13px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0.7;
+        }
+
+        .ai-intro h2 {
+            font-size: 55px;
+            font-weight: 400;
+            margin-top: 20px;
+        }
+
+        .ai-intro p {
+            margin-top: 20px;
+            line-height: 1.7;
+            opacity: 0.75;
+        }
+
+        .chat-container {
+            max-width: 800px;
+            margin: 55px auto 0;
+
+            background: white;
+            color: #193b37;
+
+            border-radius: 25px;
+
+            padding: 30px;
+
+            box-shadow: 0 25px 80px rgba(0,0,0,0.2);
+        }
+
+        .messages {
+            height: 320px;
+
+            padding: 20px;
+
+            overflow-y: auto;
+
+            background: #f3f6f4;
+
+            border-radius: 18px;
+
+            margin-bottom: 25px;
+        }
+
+        .message {
+            max-width: 80%;
+
+            padding: 13px 17px;
+
+            border-radius: 15px;
+
+            margin-bottom: 12px;
+
+            line-height: 1.5;
+        }
+
+        .bot {
+            background: #dfeae6;
+        }
+
+        .user {
+            margin-left: auto;
+            background: #174d46;
+            color: white;
+        }
+
+        /* PERSONALITY */
+
+        .personality {
+            margin-bottom: 25px;
+        }
+
+        .personality-header {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+
+            font-size: 14px;
+        }
+
+        .personality-header strong {
+            color: #174d46;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            accent-color: #174d46;
+            cursor: pointer;
+        }
+
+        .range-labels {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 7px;
+
+            font-size: 12px;
+            color: #84908c;
+        }
+
+        /* INPUT */
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex: 1;
+
+            padding: 16px 20px;
+
+            border: 1px solid #d6dedb;
+
+            border-radius: 30px;
+
+            outline: none;
+
+            font-size: 15px;
+        }
+
+        .chat-input button {
+            padding: 15px 25px;
+
+            border: none;
+
+            background: #174d46;
+            color: white;
+
+            border-radius: 30px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================
+           QUOTE
+        ========================= */
+
+        .quote {
+            padding: 120px 8%;
+
+            background: white;
+
+            text-align: center;
+        }
+
+        .quote h2 {
+            max-width: 900px;
+
+            margin: auto;
+
+            font-size: 48px;
+
+            line-height: 1.2;
+
+            font-weight: 400;
+        }
+
+        .quote p {
+            margin-top: 25px;
+
+            color: #71807c;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            background: #102f2b;
+
+            color: white;
+
+            padding: 60px 8%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        footer .logo {
+            color: white;
+        }
+
+        footer p {
+            opacity: 0.6;
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            nav {
+                display: none;
+            }
+
+            .header-button {
+                display: none;
+            }
+
+            .hero {
+                min-height: 650px;
+            }
+
+            .intro-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .topic-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                letter-spacing: -2px;
+            }
+
+            .ai-intro h2 {
+                font-size: 42px;
+            }
+
+            .quote h2 {
+                font-size: 36px;
+            }
+
+            footer {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header>
+
+    <div class="logo">
+        ACUTIL
+    </div>
+
+    <nav>
+        <a href="#about">About</a>
+        <a href="#topics">Mind & Body</a>
+        <a href="#assistant">AI Assistant</a>
+        <a href="#inspiration">Inspiration</a>
+    </nav>
+
+    <a href="#assistant" class="header-button">
+        Talk to AI
+    </a>
+
+</header>
+
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="eyebrow">
+            Mind · Body · Performance
+        </div>
+
+        <h1>
+            Feel good.<br>
+            Think clear.
+        </h1>
+
+        <p>
+            Discover inspiration for a focused mind,
+            an active body and a more balanced everyday life.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#assistant" class="primary-button">
+                Talk to our AI
+            </a>
+
+            <a href="#about" class="secondary-button">
+                Discover more
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     ABOUT
+========================= -->
+
+<section class="intro" id="about">
+
+    <div class="intro-inner">
+
+        <img
+            class="intro-image"
+            src="https://images.unsplash.com/photo-1499209974431-9dddcece7f88?auto=format&fit=crop&w=1200&q=85"
+            alt="Woman enjoying a peaceful moment"
+        >
+
+        <div class="intro-text">
+
+            <span>
+                A holistic approach
+            </span>
+
+            <h2>
+                Your mind deserves attention too.
+            </h2>
+
+            <p>
+                Our everyday lives can be demanding.
+                Concentration, mental energy and balance
+                all play an important role in how we feel
+                throughout the day.
+            </p>
+
+            <br>
+
+            <p>
+                Explore simple ideas and discover new ways
+                to support your mind and body.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     TOPICS
+========================= -->
+
+<section class="topics" id="topics">
+
+    <div class="section-heading">
+
+        <span>
+            Explore
+        </span>
+
+        <h2>
+            Mind & Body
+        </h2>
+
+        <p>
+            Small habits can make a meaningful difference.
+            Explore the areas that matter for your everyday wellbeing.
+        </p>
+
+    </div>
+
+
+    <div class="topic-grid">
+
+
+        <div class="topic-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=85"
+                alt="Meditation"
+            >
+
+            <div class="topic-content">
+
+                <h3>
+                    Focus
+                </h3>
+
+                <p>
+                    Learn more about concentration,
+                    attention and creating moments of focus.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="topic-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=900&q=85"
+                alt="Exercise"
+            >
+
+            <div class="topic-content">
+
+                <h3>
+                    Energy
+                </h3>
+
+                <p>
+                    Discover how movement and an active
+                    lifestyle can support your everyday energy.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="topic-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=900&q=85"
+                alt="Healthy food"
+            >
+
+            <div class="topic-content">
+
+                <h3>
+                    Balance
+                </h3>
+
+                <p>
+                    Explore simple ideas around routines,
+                    nutrition and a balanced lifestyle.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     AI ASSISTANT
+========================= -->
+
+<section class="ai-section" id="assistant">
+
+    <div class="ai-intro">
+
+        <span>
+            Meet your personal assistant
+        </span>
+
+        <h2>
+            Ask anything.
+        </h2>
+
+        <p>
+            Our AI assistant can help you explore ideas,
+            answer questions and give you a different perspective.
+            You can even choose how you want it to communicate.
+        </p>
+
+    </div>
+
+
+    <div class="chat-container">
+
+        <div class="messages" id="messages">
+
+            <div class="message bot">
+                Hello! 👋 I'm your AI assistant.
+                How can I help you today?
+            </div>
+
+        </div>
+
+
+        <!-- PERSONALITY SLIDER -->
+
+        <div class="personality">
+
+            <div class="personality-header">
+
+                <span>
+                    Communication style
+                </span>
+
+                <strong id="personalityValue">
+                    Balanced
+                </strong>
+
+            </div>
+
+            <input
+                type="range"
+                id="personality"
+                min="0"
+                max="100"
+                value="50"
+            >
+
+            <div class="range-labels">
+
+                <span>
+                    Direct
+                </span>
+
+                <span>
+                    Balanced
+                </span>
+
+                <span>
+                    Very friendly
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- CHAT INPUT -->
+
+        <div class="chat-input">
+
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Ask your question..."
+            >
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     QUOTE
+========================= -->
+
+<section class="quote" id="inspiration">
+
+    <h2>
+        “A clear mind creates space for the things that matter.”
+    </h2>
+
+    <p>
+        Take a moment. Breathe. Focus.
+    </p>
+
+</section>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    <div class="logo">
+        ACUTIL
+    </div>
+
+    <p>
+        Mind & Body · Inspiration · AI
+    </p>
+
+</footer>
+
+
+
+<script>
+
+    /* =========================
+       PERSONALITY SLIDER
+    ========================= */
+
+    const slider =
+        document.getElementById("personality");
+
+    const personalityValue =
+        document.getElementById("personalityValue");
+
+
+    slider.addEventListener("input", function () {
+
+        const value = Number(this.value);
+
+
+        if (value < 20) {
+
+            personalityValue.textContent =
+                "Very direct";
+
+        }
+
+        else if (value < 40) {
+
+            personalityValue.textContent =
+                "Direct";
+
+        }
+
+        else if (value < 60) {
+
+            personalityValue.textContent =
+                "Balanced";
+
+        }
+
+        else if (value < 80) {
+
+            personalityValue.textContent =
+                "Friendly";
+
+        }
+
+        else {
+
+            personalityValue.textContent =
+                "Very friendly";
+
+        }
+
+    });
+
+
+
+    /* =========================
+       TEMPORARY CHAT
+    ========================= */
+
+    function sendMessage() {
+
+        const input =
+            document.getElementById("userInput");
+
+        const messages =
+            document.getElementById("messages");
+
+        const text =
+            input.value.trim();
+
+
+        if (!text) {
+            return;
+        }
+
+
+        /* USER MESSAGE */
+
+        const userMessage =
+            document.createElement("div");
+
+        userMessage.className =
+            "message user";
+
+        userMessage.textContent =
+            text;
+
+        messages.appendChild(userMessage);
+
+
+        input.value = "";
+
+
+        /* TEMPORARY BOT RESPONSE */
+
+        setTimeout(function () {
+
+            const botMessage =
+                document.createElement("div");
+
+            botMessage.className =
+                "message bot";
+
+            botMessage.textContent =
+                "Thanks for your question! Soon I'll be connected to the real AI. 🤖";
+
+            messages.appendChild(botMessage);
+
+
+            messages.scrollTop =
+                messages.scrollHeight;
+
+        }, 500);
+
+    }
+
+</script>
+
+
+</body>
+</html>
+```
