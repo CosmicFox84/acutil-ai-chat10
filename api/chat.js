@@ -57,9 +57,17 @@ Answer the user's question naturally and helpfully.`,
       });
     }
 
-    return response.status(200).json({
-      reply: data.output_text || "I couldn't generate a response."
-    });
+    const reply =
+  data.output_text ||
+  data.output
+    ?.flatMap(item => item.content || [])
+    .find(item => item.type === "output_text")
+    ?.text ||
+  "I couldn't generate a response.";
+
+return response.status(200).json({
+  reply: reply
+});
 
   } catch (error) {
     console.error(error);
